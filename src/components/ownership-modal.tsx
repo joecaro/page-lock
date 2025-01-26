@@ -40,12 +40,12 @@ export default function OwnershipModal({
   if (!isOpen) return null;
 
   return (
-    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full">
+    <div className="absolute inset-0 bg-black/50 dark:bg-black/75 flex items-center justify-center">
+      <div className="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-lg max-w-lg w-full">
         <div className="space-y-4">
           <div>
             <h2 className="text-lg font-semibold">Take Ownership</h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               {owner?.user_name ? (
                 <>
                   This page is currently owned by{" "}
@@ -64,13 +64,13 @@ export default function OwnershipModal({
             <button
               onClick={() => takeOwnership()}
               disabled={isFetching}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+              className="px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded hover:bg-blue-600 disabled:opacity-50"
             >
               {isAttemptingOwnership ? "Taking ownership..." : "Take Ownership"}
             </button>
             <button
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded hover:bg-gray-50 dark:hover:bg-gray-800"
             >
               {cancelText || "Cancel"}
             </button>

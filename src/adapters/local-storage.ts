@@ -1,31 +1,17 @@
 import type { OwnershipAdapter, PageOwner } from "../types";
+import { StorageEventAction, dispatchStorageEvent } from "./util";
 
-const STORAGE_KEY = "locksmith_page_owners";
+const STORAGE_KEY = "PageLock_page_owners";
 
 interface LocalStorageAdapterOptions {
   /** Storage key prefix */
   prefix?: string;
 }
 
-export type StorageEventAction =
-  | "getAllOwners"
-  | "lockPage"
-  | "unlockPage"
-  | "takePageOwnership";
-
-export interface StorageEventDetails {
-  action: StorageEventAction;
-  key: string;
-  newValue: string;
-  oldValue: string;
-  url: string;
-  storageArea: Storage;
-}
-
 export function createLocalStorageAdapter(
   options: LocalStorageAdapterOptions = {}
 ): OwnershipAdapter {
-  const { prefix = "locksmith" } = options;
+  const { prefix = "PageLock" } = options;
   const storageKey = `${prefix}_page_owners`;
 
   // Helper to get all owners from storage
@@ -41,23 +27,6 @@ export function createLocalStorageAdapter(
     window.localStorage.setItem(storageKey, JSON.stringify(owners));
   };
 
-  // Helper to dispatch storage events
-  const dispatchStorageEvent = (action: StorageEventAction, value: any) => {
-    if (typeof window === "undefined") return;
-    window.dispatchEvent(
-      new CustomEvent("storage-event", {
-        detail: {
-          action,
-          key: storageKey,
-          newValue: JSON.stringify(value),
-          oldValue: JSON.stringify(value),
-          url: window.location.href,
-          storageArea: window.localStorage,
-        },
-      })
-    );
-  };
-
   return {
     getPageOwner: async (pageId) => {
       const owners = getAllOwners();
@@ -66,7 +35,14 @@ export function createLocalStorageAdapter(
 
     getAllPageOwners: async () => {
       const owners = getAllOwners();
-      dispatchStorageEvent("getAllOwners", owners);
+      dispatchStorageEvent({
+        action: "getAllOwners",
+        key: storageKey,
+        newValue: JSON.stringify(owners),
+        oldValue: JSON.stringify(owners),
+        url: window.location.href,
+        storageArea: window.localStorage,
+      });
       return owners;
     },
 
@@ -81,7 +57,14 @@ export function createLocalStorageAdapter(
       const owners = getAllOwners();
       owners[pageId] = owner;
       saveOwners(owners);
-      dispatchStorageEvent("lockPage", owner);
+      dispatchStorageEvent({
+        action: "lockPage",
+        key: storageKey,
+        newValue: JSON.stringify(owner),
+        oldValue: JSON.stringify(owner),
+        url: window.location.href,
+        storageArea: window.localStorage,
+      });
 
       return owner;
     },
@@ -93,7 +76,14 @@ export function createLocalStorageAdapter(
       if (!owner || (owner && owner.user_id === userId)) {
         delete owners[pageId];
         saveOwners(owners);
-        dispatchStorageEvent("unlockPage", { pageId, userId });
+        dispatchStorageEvent({
+          action: "unlockPage",
+          key: storageKey,
+          newValue: JSON.stringify(owner),
+          oldValue: JSON.stringify(owner),
+          url: window.location.href,
+          storageArea: window.localStorage,
+        });
       } else {
         throw new Error("Not authorized to unlock this page");
       }
@@ -110,7 +100,14 @@ export function createLocalStorageAdapter(
       const owners = getAllOwners();
       owners[pageId] = owner;
       saveOwners(owners);
-      dispatchStorageEvent("takePageOwnership", owner);
+      dispatchStorageEvent({
+        action: "takePageOwnership",
+        key: storageKey,
+        newValue: JSON.stringify(owner),
+        oldValue: JSON.stringify(owner),
+        url: window.location.href,
+        storageArea: window.localStorage,
+      });
 
       return owner;
     },

@@ -22,26 +22,31 @@ npm install @joecarot/page-lock
 ## Quick Start
 
 ```tsx
-import { 
-  OwnershipProvider, 
-  createLocalStorageAdapter,
-  usePageOwnership,
-  OwnerBadge,
-  OwnershipModal
+import {
+  OwnershipProvider,
+  createApiStorageAdapter
 } from '@joecarot/page-lock';
 
-// Create a localStorage adapter
-const ownershipAdapter = createLocalStorageAdapter({
-  prefix: 'my-app', // Optional prefix for localStorage keys
+// Create a adapter for fetching and saving ownership state
+const ownershipAdapter = createApiStorageAdapter({
+  getAllOwners: () => Promise<Record<string, PageOwner>>;
+  lockPage: (
+    pageId: string,
+    userId: string,
+    userName: string
+  ) => Promise<PageOwner>;
+  unlockPage: (pageId: string, userId: string) => Promise<void>;
+  takePageOwnership: (
+    pageId: string,
+    userId: string,
+    userName: string
+  ) => Promise<PageOwner>;
+  storageKey: string;
 });
 
 // Create a user adapter
 const userAdapter = {
-  getCurrentUser: () => Promise.resolve({
-    id: '1',
-    email: 'user@example.com',
-    name: 'Current User',
-  }),
+  getCurrentUser: () => Promise<User>,
 };
 
 // Create the config
@@ -65,9 +70,34 @@ function App() {
 
 ## Components
 
+### Using the Component Approach
+
+```tsx
+import { OwnerBadge, OwnershipModal } from '@joecarot/page-lock';
+
+function RecordView({ recordId }) {
+  return (
+    <div>
+      {/* Simple ownership badge */}
+      <OwnerBadge pageId={`record-${recordId}`} />
+
+      {/* Ownership modal with built-in management */}
+      <OwnershipModal
+        pageId={`record-${recordId}`}
+        initialIsOpen={true}
+        onCancel={() => {}}
+        cancelText="Close"
+      />
+    </div>
+  );
+}
+```
+
 ### Using the Hook Approach
 
 ```tsx
+import { usePageOwnership } from '@joecarot/page-lock';
+
 function RecordView({ recordId }) {
   const {
     currentOwner,
@@ -116,27 +146,6 @@ function RecordView({ recordId }) {
 }
 ```
 
-### Using the Component Approach
-
-```tsx
-function RecordView({ recordId }) {
-  return (
-    <div>
-      {/* Simple ownership badge */}
-      <OwnerBadge pageId={`record-${recordId}`} />
-
-      {/* Ownership modal with built-in management */}
-      <OwnershipModal
-        pageId={`record-${recordId}`}
-        initialIsOpen={true}
-        onCancel={() => {}}
-        cancelText="Close"
-      />
-    </div>
-  );
-}
-```
-
 ## API Reference
 
 ### Hooks
@@ -145,18 +154,18 @@ function RecordView({ recordId }) {
 
 ```tsx
 const {
-  currentOwner,        // Current page owner
+  currentOwner, // Current page owner
   isOwnedByCurrentUser, // Whether current user owns the page
-  lockPage,            // Function to lock the page
-  unlockPage,          // Function to unlock the page
-  takeOwnership,       // Function to take ownership
-  isFetching,          // Loading state
-  error,               // Error state
-  refreshOwnership,    // Function to refresh ownership
-  lockedPages,         // All locked pages
+  lockPage, // Function to lock the page
+  unlockPage, // Function to unlock the page
+  takeOwnership, // Function to take ownership
+  isFetching, // Loading state
+  error, // Error state
+  refreshOwnership, // Function to refresh ownership
+  lockedPages, // All locked pages
 } = usePageOwnership({
-  pageId,              // Unique page identifier
-  pollingInterval,     // Optional: Polling interval in ms (default: 3000)
+  pageId, // Unique page identifier
+  pollingInterval, // Optional: Polling interval in ms (default: 3000)
 });
 ```
 
@@ -164,13 +173,13 @@ const {
 
 ```tsx
 const {
-  owner,              // Current page owner
-  isFetching,         // Loading state
-  error,              // Error state
-  refreshOwner,       // Function to refresh owner
+  owner, // Current page owner
+  isFetching, // Loading state
+  error, // Error state
+  refreshOwner, // Function to refresh owner
 } = useOwner({
-  pageId,             // Unique page identifier
-  pollingInterval,    // Optional: Polling interval in ms
+  pageId, // Unique page identifier
+  pollingInterval, // Optional: Polling interval in ms
 });
 ```
 
@@ -181,9 +190,7 @@ const {
 Provider component that manages ownership state.
 
 ```tsx
-<OwnershipProvider config={config}>
-  {children}
-</OwnershipProvider>
+<OwnershipProvider config={config}>{children}</OwnershipProvider>
 ```
 
 #### `OwnerBadge`
@@ -191,7 +198,7 @@ Provider component that manages ownership state.
 A simple badge component that displays the current owner.
 
 ```tsx
-<OwnerBadge 
+<OwnerBadge
   pageId="page-id"
   className="custom-class" // Optional: custom styling
 />
@@ -212,13 +219,52 @@ Modal component for handling ownership transfers.
 
 ### Adapters
 
+#### `createApiStorageAdapter`
+
+Creates an adapter that uses an API for ownership state. Useful for testing functionality in isolation.
+
+```tsx
+const adapter = createApiStorageAdapter({
+  getAllOwners: () => Promise<Record<string, PageOwner>>,
+  lockPage: (pageId: string, userId: string, userName: string) => Promise<PageOwner>,
+  unlockPage: (pageId: string, userId: string) => Promise<void>,
+  takePageOwnership: (pageId: string, userId: string, userName: string) => Promise<PageOwner>,
+  storageKey: "my-app", // Optional storage key prefix
+});
+```
+
+### Types
+
+```tsx
+interface PageOwner {
+  user_id: string;
+  user_name: string;
+  page_id: string;
+  timestamp: number;
+}
+
+interface User {
+  id: string;
+  email: string;
+  name?: string;
+}
+
+interface OwnershipConfig {
+  userAdapter: UserAdapter;
+  ownershipAdapter: OwnershipAdapter;
+  options?: {
+    pollingInterval?: number;
+  };
+}
+```
+
 #### `createLocalStorageAdapter`
 
 Creates an adapter that uses localStorage for ownership state.
 
 ```tsx
 const adapter = createLocalStorageAdapter({
-  prefix: 'my-app', // Optional storage key prefix
+  prefix: "my-app", // Optional storage key prefix
 });
 ```
 
@@ -250,6 +296,7 @@ interface OwnershipConfig {
 ## Real-World Example
 
 Check out the `examples` directory for a complete demo application showcasing:
+
 - Real-time ownership tracking
 - Multiple user simulation
 - Console monitoring
@@ -263,4 +310,4 @@ We welcome contributions! Please see our contributing guide for details.
 
 ## License
 
-MIT © [Your Name] 
+MIT © [Your Name]

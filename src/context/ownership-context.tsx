@@ -6,8 +6,6 @@ export interface OwnershipConfig {
   userAdapter: UserAdapter;
   /** Ownership operations adapter */
   ownershipAdapter: OwnershipAdapter;
-  /** API adapter */
-  apiAdapter?: ApiAdapter;
   options?: {
     /** Whether to use the local storage adapter */
     pollingInterval?: number;
