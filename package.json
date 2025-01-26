@@ -1,6 +1,6 @@
 {
   "name": "@joecarot/page-lock",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Joe Carothers <joseph.samuel.carothers@gmail.com> (https://josephcarothers.com)",
   "description": "Elegant page ownership management for modern web applications",
   "main": "./dist/index.js",
