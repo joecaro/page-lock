@@ -1,6 +1,6 @@
-# 🔒 Locksmith
+# 🔒 Page Lock
 
-Elegant page ownership management for modern web applications. Locksmith provides a simple way to manage page ownership and locking in real-time applications.
+Elegant page ownership management for modern web applications. Page Lock provides a simple way to manage page ownership and locking in real-time applications.
 
 ## Features
 
@@ -16,7 +16,7 @@ Elegant page ownership management for modern web applications. Locksmith provide
 ## Installation
 
 ```bash
-npm install @joecarot/locksmith
+npm install @joecaro/page-lock
 ```
 
 ## Quick Start
@@ -28,7 +28,7 @@ import {
   usePageOwnership,
   OwnerBadge,
   OwnershipModal
-} from '@joecarot/locksmith';
+} from '@joecaro/page-lock';
 
 // Create a localStorage adapter
 const ownershipAdapter = createLocalStorageAdapter({
