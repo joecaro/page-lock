@@ -1,0 +1,22 @@
+
+[2K[1G[1myarn run v1.22.22[22m
+[2K[1G[2m$ tsup[22m
+[34mCLI[39m Building entry: src/index.tsx
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.3.6
+[34mCLI[39m Using tsup config: /Users/josephcarothers/Developer/personal/my-app-turbo/packages/locksmith/tsup.config.ts
+[34mCLI[39m Target: es2017
+[34mCLI[39m Cleaning output folder
+[34mESM[39m Build start
+[34mCJS[39m Build start
+[32mESM[39m [1mdist/index.mjs     [22m[32m82.85 KB[39m
+[32mESM[39m [1mdist/index.mjs.map [22m[32m128.36 KB[39m
+[32mESM[39m ⚡️ Build success in 34ms
+[32mCJS[39m [1mdist/index.js     [22m[32m84.19 KB[39m
+[32mCJS[39m [1mdist/index.js.map [22m[32m128.95 KB[39m
+[32mCJS[39m ⚡️ Build success in 38ms
+DTS Build start
+DTS ⚡️ Build success in 904ms
+DTS dist/index.d.mts 3.68 KB
+DTS dist/index.d.ts  3.68 KB
+[2K[1G✨  Done in 1.38s.

@@ -1,0 +1,57 @@
+{
+  "name": "@joecarot/page-lock",
+  "version": "0.1.0",
+  "author": "Joe Carothers <joseph.samuel.carothers@gmail.com> (https://josephcarothers.com)",
+  "description": "Elegant page ownership management for modern web applications",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist/**"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^8.0.0",
+    "react": "^18.2.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joecarot/locksmith.git"
+  },
+  "keywords": [
+    "react",
+    "page-ownership",
+    "collaboration",
+    "state-management"
+  ]
+}
