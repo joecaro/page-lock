@@ -16,7 +16,7 @@ Elegant page ownership management for modern web applications. Page Lock provide
 ## Installation
 
 ```bash
-npm install @joecaro/page-lock
+npm install @joecarot/page-lock
 ```
 
 ## Quick Start
@@ -28,7 +28,7 @@ import {
   usePageOwnership,
   OwnerBadge,
   OwnershipModal
-} from '@joecaro/page-lock';
+} from '@joecarot/page-lock';
 
 // Create a localStorage adapter
 const ownershipAdapter = createLocalStorageAdapter({
