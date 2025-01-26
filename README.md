@@ -1,5 +1,7 @@
 # 🔒 Page Lock
 
+![Screen Recording 2025-01-26 at 10 53 11 AM (1)](https://github.com/user-attachments/assets/6fb8b5df-efea-4994-a4da-8103c0caac5c)
+
 Elegant page ownership management for modern web applications. Page Lock provides a simple way to manage page ownership and locking in real-time applications.
 
 ## Features
