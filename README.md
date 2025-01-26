@@ -72,6 +72,8 @@ function App() {
 
 ### Using the Component Approach
 
+The `OwnerBadge` and `OwnershipModal` components are used to display and manage page ownership. This is the recommended approach for most applications. The `OwnershipModal` will automatically handle the ownership transfer flow on mount, and release the page ownership when the modal is unmounted.
+
 ```tsx
 import { OwnerBadge, OwnershipModal } from '@joecarot/page-lock';
 
@@ -94,6 +96,8 @@ function RecordView({ recordId }) {
 ```
 
 ### Using the Hook Approach
+
+The `usePageOwnership` hook is used to manage page ownership. This has more fine-grained control over the ownership state, but requires more manual handling of the ownership flow.
 
 ```tsx
 import { usePageOwnership } from '@joecarot/page-lock';
@@ -310,4 +314,4 @@ We welcome contributions! Please see our contributing guide for details.
 
 ## License
 
-MIT © [Your Name]
+MIT © [Joe Carothers](https://josephcarothers.com)
