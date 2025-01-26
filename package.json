@@ -1,6 +1,6 @@
 {
   "name": "@joecarot/page-lock",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Joe Carothers <joseph.samuel.carothers@gmail.com> (https://josephcarothers.com)",
   "description": "Elegant page ownership management for modern web applications",
   "main": "./dist/index.js",
@@ -53,9 +53,6 @@
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",
     "react-dom": "^18.2.0 || ^19.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "repository": {
     "type": "git",
