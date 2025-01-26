@@ -28,7 +28,7 @@ export function RecordViewHook({ record, onClose }: RecordViewProps) {
 
   return (
     <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl mx-4">
         {/* Header */}
         <div className="border-b p-4 flex justify-between items-start">
           <div>
@@ -38,7 +38,7 @@ export function RecordViewHook({ record, onClose }: RecordViewProps) {
           <div className="flex items-center space-x-2">
             {currentOwner ? (
               <div className="flex items-center space-x-2">
-                <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
+                <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-xs">
                   Locked by {currentOwner.user_name}
                 </span>
                 {isOwnedByCurrentUser ? (
@@ -62,7 +62,7 @@ export function RecordViewHook({ record, onClose }: RecordViewProps) {
             ) : (
               <button
                 onClick={() => lockPage()}
-                className="px-3 py-1 bg-blue-500 text-white rounded-full text-xs hover:bg-blue-600"
+                className="px-3 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded-full text-xs hover:bg-blue-600 dark:hover:bg-blue-700"
                 disabled={isFetching}
               >
                 Lock Record
@@ -96,7 +96,7 @@ export function RecordViewHook({ record, onClose }: RecordViewProps) {
           </div>
 
           {error && (
-            <div className="mt-4 p-2 bg-red-50 text-red-500 rounded text-sm">
+            <div className="mt-4 p-2 bg-red-50 dark:bg-red-900/50 text-red-500 dark:text-red-200 rounded-xs text-sm">
               Error: {error}
             </div>
           )}
@@ -110,7 +110,7 @@ export function RecordViewHook({ record, onClose }: RecordViewProps) {
         <div className="border-t p-4 flex justify-end space-x-2">
           <button
             onClick={onClose}
-            className="px-4 py-2 border rounded hover:bg-gray-50"
+            className="px-4 py-2 border rounded-xs hover:bg-gray-50 dark:hover:bg-gray-800"
           >
             Close
           </button>

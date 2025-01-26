@@ -41,7 +41,7 @@ export default function OwnershipModal({
 
   return (
     <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-lg w-full">
         <div className="space-y-4">
           <div>
             <h2 className="text-lg font-semibold">Take Ownership</h2>

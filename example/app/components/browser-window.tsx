@@ -42,15 +42,13 @@ export function BrowserWindow({ user, records }: BrowserWindowProps) {
 
   return (
     <div className="flex flex-col space-y-4">
-      <div className="flex-1 border rounded-lg shadow-lg overflow-hidden bg-white relative">
+      <div className="flex-1 border rounded-lg shadow-lg overflow-hidden bg-white dark:bg-gray-800 relative">
         {/* Browser chrome */}
-        <div className="bg-gray-100 border-b p-2 flex items-center space-x-2">
-          <div className="flex space-x-1">
-            <div className="w-3 h-3 rounded-full bg-red-500" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500" />
-            <div className="w-3 h-3 rounded-full bg-green-500" />
-          </div>
-          <div className="flex-1 bg-white px-3 py-1 rounded text-sm text-gray-500 text-center">
+        <div className="bg-gray-100 dark:bg-gray-700 border-b p-2 flex items-center space-x-2">
+          <div className="w-3 h-3 rounded-full bg-red-500" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500" />
+          <div className="w-3 h-3 rounded-full bg-green-500" />
+          <div className="flex-1 bg-white dark:bg-gray-800 px-3 py-1 rounded-xs text-sm text-gray-500 dark:text-gray-400 text-center">
             localhost:3000
           </div>
         </div>

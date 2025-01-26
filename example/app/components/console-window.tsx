@@ -73,16 +73,16 @@ export function ConsoleWindow() {
   }, []);
 
   return (
-    <div className="border rounded-lg shadow-lg overflow-hidden bg-white col-span-2">
+    <div className="border rounded-lg shadow-lg overflow-hidden bg-white dark:bg-gray-800 col-span-2">
       {/* Console header */}
-      <div className="bg-gray-100 border-b p-2 flex items-center justify-between">
+      <div className="bg-gray-100 dark:bg-gray-700 border-b p-2 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="w-3 h-3 rounded-full bg-green-500" />
           <span className="text-sm font-mono">Locksmith Console</span>
         </div>
         <button
           onClick={() => setEntries([])}
-          className="text-xs text-gray-500 hover:text-gray-700"
+          className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
         >
           Clear
         </button>
@@ -93,7 +93,7 @@ export function ConsoleWindow() {
         {/* Console logs */}
         <Logs entries={entries} />
         {/* Local storage data */}
-        <div className="overflow-auto p-2 font-mono text-sm bg-gray-50">
+        <div className="overflow-auto p-2 font-mono text-sm bg-gray-50 dark:bg-gray-900">
           <div className="text-xs text-gray-500 mb-1">Local Storage Data:</div>
           <pre className="text-gray-600 whitespace-pre-wrap">
             {localStorageData}
@@ -138,12 +138,12 @@ function Logs({ entries }: { entries: ConsoleEntry[] }) {
             className={cn(
               "text-xs px-1 py-0.5 rounded-md",
               entry.action === "lockPage"
-                ? "bg-red-100 text-red-800"
+                ? "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200"
                 : entry.action === "unlockPage"
-                ? "bg-green-100 text-green-800"
+                ? "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200"
                 : entry.action === "takePageOwnership"
-                ? "bg-blue-100 text-blue-800"
-                : "bg-gray-100 text-gray-800"
+                ? "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200"
+                : "bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200"
             )}
           >
             {entry.action}

@@ -14,7 +14,7 @@ interface RecordListItemProps {
 export function RecordListItem({ record, onSelect }: RecordListItemProps) {
   return (
     <div 
-      className="border rounded-lg p-4 mb-4 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+      className="border rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-2xs hover:shadow-md transition-shadow cursor-pointer"
       onClick={() => onSelect(record)}
     >
       <div className="flex justify-between items-start">
@@ -23,7 +23,7 @@ export function RecordListItem({ record, onSelect }: RecordListItemProps) {
           <p className="text-sm text-gray-500">ID: {record.id}</p>
         </div>
         <button 
-          className="px-3 py-1 bg-blue-500 text-white rounded-full text-xs hover:bg-blue-600"
+          className="px-3 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded-full text-xs hover:bg-blue-600 dark:hover:bg-blue-700"
           onClick={(e) => {
             e.stopPropagation();
             onSelect(record);

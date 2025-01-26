@@ -61,7 +61,7 @@ export function RecordViewComponent({ record, onClose }: RecordViewProps) {
         <div className="border-t p-4 flex justify-end space-x-2">
           <button
             onClick={onClose}
-            className="px-4 py-2 border rounded hover:bg-gray-50"
+            className="px-4 py-2 border rounded-xs hover:bg-gray-50"
           >
             Close
           </button>

@@ -39,7 +39,7 @@ const records = [
 
 export default function TestPage() {
   return (
-    <div className="min-h-screen  p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-10xl mx-auto">
         <h1 className="text-2xl font-bold mb-8 text-center">PageLock Demo</h1>
 
