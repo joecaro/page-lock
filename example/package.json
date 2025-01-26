@@ -1,5 +1,5 @@
 {
-  "name": "@joecarot/PageLock-example",
+  "name": "@joecarot/page-lock-example",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,13 +13,15 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.474.0",
-    "next": "14.1.0",
+    "next": "^14.2.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.6.0",
+    "tailwindcss": "^4.0.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -27,7 +29,6 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
 }

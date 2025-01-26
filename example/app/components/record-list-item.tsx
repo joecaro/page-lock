@@ -33,7 +33,7 @@ export function RecordListItem({ record, onSelect }: RecordListItemProps) {
         </button>
       </div>
       
-      <div className="mt-2 text-sm text-gray-600 line-clamp-2">
+      <div className="mt-2 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
         {record.content}
       </div>
     </div>

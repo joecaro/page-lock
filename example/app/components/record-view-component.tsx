@@ -22,13 +22,14 @@ export function RecordViewComponent({ record, onClose }: RecordViewProps) {
         onCancel={onClose}
         cancelText="Close"
       />
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl mx-4">
         {/* Header */}
-        <div className="border-b p-4 flex justify-between items-start">
+        <div className="border-b p-4 flex justify-between items-center gap-8">
           <div>
             <h2 className="text-xl font-semibold">{record.title}</h2>
             <p className="text-sm text-gray-500">ID: {record.id}</p>
           </div>
+          <div className="grow-1" />
           <OwnerBadge pageId={`record-${record.id}`} />
           <button
             onClick={onClose}
