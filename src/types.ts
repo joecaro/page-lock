@@ -11,24 +11,33 @@ export interface User {
   name?: string;
 }
 
-export interface UserAdapter {
-  /** Get the current user's information */
-  getCurrentUser: () => Promise<User | null> | User | null;
-  /** Subscribe to user changes */
-  subscribe?: (callback: (user: User | null) => void) => () => void;
+export interface ApiStorageAdapterOptions {
+  getAllOwners: jest.Mock<Promise<Record<string, PageOwner>>> | (() => Promise<Record<string, PageOwner>>);
+  lockPage: jest.Mock<Promise<PageOwner>> | ((pageId: string, userId: string, userName: string) => Promise<PageOwner>);
+  unlockPage: jest.Mock<Promise<void>> | ((pageId: string, userId: string) => Promise<void>);
+  takePageOwnership: jest.Mock<Promise<PageOwner>> | ((pageId: string, userId: string, userName: string) => Promise<PageOwner>);
+  storageKey: string;
 }
 
 export interface OwnershipAdapter {
-  /** Get the current owner of a page */
-  getPageOwner: (pageId: string) => Promise<PageOwner | null>;
-  /** Get all locked pages */
   getAllPageOwners: () => Promise<Record<string, PageOwner>>;
-  /** Lock a page for a user */
+  getPageOwner: (pageId: string) => Promise<PageOwner | null>;
   lockPage: (pageId: string, userId: string, userName: string) => Promise<PageOwner>;
-  /** Unlock a page */
   unlockPage: (pageId: string, userId: string) => Promise<void>;
-  /** Take ownership of a page */
   takePageOwnership: (pageId: string, userId: string, userName: string) => Promise<PageOwner>;
+}
+
+export interface UserAdapter {
+  getCurrentUser: () => Promise<User>;
+  subscribe?: (callback: (user: User | null) => void) => () => void;
+}
+
+export interface OwnershipConfig {
+  userAdapter: UserAdapter;
+  ownershipAdapter: OwnershipAdapter;
+  options?: {
+    pollingInterval?: number;
+  };
 }
 
 export interface ApiAdapter {

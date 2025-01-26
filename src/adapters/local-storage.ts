@@ -16,8 +16,9 @@ export function createLocalStorageAdapter(
 
   // Helper to get all owners from storage
   const getAllOwners = (): Record<string, PageOwner> => {
-    if (typeof window === "undefined") return {};
-    const stored = window.localStorage.getItem(storageKey);
+
+    if (typeof localStorage === "undefined") return {};
+    const stored = localStorage.getItem(storageKey);
     return stored ? JSON.parse(stored) : {};
   };
 
